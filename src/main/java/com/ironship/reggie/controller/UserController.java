@@ -8,6 +8,7 @@ import com.ironship.reggie.service.UserService;
 import com.ironship.reggie.utils.ValidateCodeUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,12 +26,14 @@ import java.util.concurrent.TimeUnit;
 public class UserController {
 
     private final UserService userService;
+    private final RedisCacheManager redisCacheManager;
 
     private final RedisTemplate redisTemplate;
 
-    public UserController(UserService userService, RedisTemplate redisTemplate) {
+    public UserController(UserService userService, RedisTemplate redisTemplate, RedisCacheManager redisCacheManager) {
         this.userService = userService;
         this.redisTemplate = redisTemplate;
+        this.redisCacheManager = redisCacheManager;
     }
 
     @PostMapping("/sendMsg")
