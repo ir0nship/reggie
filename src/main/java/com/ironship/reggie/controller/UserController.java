@@ -26,14 +26,12 @@ import java.util.concurrent.TimeUnit;
 public class UserController {
 
     private final UserService userService;
-    private final RedisCacheManager redisCacheManager;
 
     private final RedisTemplate redisTemplate;
 
-    public UserController(UserService userService, RedisTemplate redisTemplate, RedisCacheManager redisCacheManager) {
+    public UserController(UserService userService, RedisTemplate redisTemplate) {
         this.userService = userService;
         this.redisTemplate = redisTemplate;
-        this.redisCacheManager = redisCacheManager;
     }
 
     @PostMapping("/sendMsg")
